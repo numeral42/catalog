@@ -1,0 +1,48 @@
+@extends('adminlte::page')
+
+@section('title', 'Dashboard')
+
+@section('content_header')
+@if (!auth()->user())
+<div class="w-full text-right">
+
+    <a href="{{ route('login') }}"
+        class="bg-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</a>
+
+    <a href="{{ route('register') }}"
+        class="bg-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Register</a>
+
+</div>
+@endif
+    <h1>Etiquetas</h1>
+@stop
+
+@section('content')
+
+<div class="container py-8">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            @foreach ($products as $product)
+                <x-home.card-product :product="$product">
+                </x-home.card-product>
+            @endforeach 
+
+        </div>
+
+    <div class="mt-4">
+            {{ $products->links() }}
+        </div>
+
+    </div>
+@stop
+
+@section('css')
+<link rel="stylesheet" href="{{ mix('css/app.css') }}">
+<script src="https://cdn.tailwindcss.com"></script>
+@livewireStyles
+@stop
+
+@section('js')
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    @livewireScripts
+@stop
